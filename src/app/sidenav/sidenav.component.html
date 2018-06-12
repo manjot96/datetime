@@ -1,0 +1,89 @@
+<mat-sidenav-container class="sidenav-container" [formGroup] = "formgroup" *ngIf="formgroup">
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+        <span>Material DateTime Picker</span>
+        </mat-toolbar>
+
+        <div class="container-fluid">
+            <mat-card class="mt-3">
+
+                <mat-card-header>
+                    <mat-card-title>Material DateTime</mat-card-title>
+                    <mat-card-subtitle>By Manjot</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+
+                    <mat-form-field>
+
+                        <button mat-button
+                                mat-icon-button
+                                matPrefix
+                                [class.error]="time.errors?.pattern"
+                                class="form-icon-btn">
+                            <mat-icon>access_time</mat-icon>
+                        </button>
+
+                        <input matInput placeholder="Time" aria-label="Time" [matAutocomplete]="auto" formControlName ="time">
+
+                        <button mat-button
+                                matSuffix
+                                mat-icon-button
+                                (click)="subtract()"
+                                class="form-icon-btn"
+                                [class.error]="time.errors?.pattern"
+                                aria-label="Left">
+                            <mat-icon>keyboard_arrow_left</mat-icon>
+                        </button>
+
+                        <button mat-button
+                                matSuffix
+                                mat-icon-button
+                                (click)="add()"
+                                class="form-icon-btn"
+                                [class.error]="time.errors?.pattern"
+                                aria-label="Right">
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                        </button>
+
+
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let time of times" [value]="time">
+                                {{ time }}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-error *ngIf="time.errors?.pattern">Please enter a valid time.</mat-error>
+                    </mat-form-field>&nbsp;&nbsp;
+
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date">
+                        <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+
+                        <button mat-button
+                                matSuffix
+                                mat-icon-button
+                                (click)="subtractDate()"
+                                class="form-icon-btn"
+                                aria-label="Left">
+                            <mat-icon>keyboard_arrow_left</mat-icon>
+                        </button>
+
+                        <button mat-button
+                                matSuffix
+                                mat-icon-button
+                                (click)="addDate()"
+                                class="form-icon-btn"
+                                aria-label="Right">
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
