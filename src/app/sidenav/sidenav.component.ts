@@ -88,10 +88,6 @@ export class SidenavComponent implements OnInit {
             'time': this.time,
             'date': this.date
         });
-
-        this.time.valueChanges.subscribe((value: string) => {
-            console.log( this.time );
-        });
     }
 
     public subtract(): void {
