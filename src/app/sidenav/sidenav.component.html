@@ -24,7 +24,7 @@
                             <mat-icon>access_time</mat-icon>
                         </button>
 
-                        <input matInput placeholder="Time" aria-label="Time" [matAutocomplete]="auto" formControlName ="time">
+                        <input matInput placeholder="Time" aria-label="Time" [matAutocomplete]="auto" formControlName ="time" (blur)="validateField()">
 
                         <button mat-button
                                 matSuffix

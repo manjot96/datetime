@@ -36,24 +36,17 @@ export class SidenavComponent implements OnInit {
     public readonly TIME_FORMAT = 'h:mm A';
     public readonly DATE_FORMAT = 'MMMM D, YYYY';
 
-    isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
-
     constructor(
-        private breakpointObserver: BreakpointObserver,
         private formBuilder: FormBuilder
     ) {
-        // console.log(moment().format(this.DATE_FORMAT));
+        const test1 = "3:50PM";
+        console.log(test1[test1.length - 3]);
+
+        console.log( test1.substr(0, test1.length - 2));
+        console.log( test1.substr(-2, 2));
         const start = moment();
         const remainder = 30 - (start.minute() % 30 );
         const dateTime = moment(start).add(remainder, "minutes").format(this.TIME_FORMAT);
-
-        // console.log( moment( '5:19 AM', this.TIME_FORMAT ).isValid() );
-        // console.log( moment( '5 AM', this.TIME_FORMAT ).isValid() );
-        // console.log( moment( ':19 AM', this.TIME_FORMAT ).isValid() );
-        // console.log( moment( '519 AM', this.TIME_FORMAT ).isValid() );
-        // console.log( moment( '5:1 AM', this.TIME_FORMAT ).isValid() );
-        // console.log( moment( '5:19 A', this.TIME_FORMAT ).isValid() );
-        // console.log ( dateTime);
 
 
         for ( let t = 0; t < 2; t++ ) {
@@ -88,6 +81,15 @@ export class SidenavComponent implements OnInit {
             'time': this.time,
             'date': this.date
         });
+    }
+
+    public validateField(): void {
+        const value: string = this.time.value;
+        const ampm: string = value.substr( -2, 2 ).toUpperCase();
+        console.log(value);
+        if ( value[ value.length - 3 ] !== ' ' && (ampm === 'AM' || ampm === 'PM') ) {
+            this.time.setValue( `${value.substr(0, value.length - 2 )} ${ampm}`)
+        }
     }
 
     public subtract(): void {
